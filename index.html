@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Para Minha Princesa 💛</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      background: #fffafc;
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      padding: 2rem;
+      color: #5f0f40;
+    }
+    button {
+      background: #ffb3c1;
+      border: none;
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.2s;
+      margin-top: 1rem;
+    }
+    button:hover {
+      background: #ff9aa2;
+    }
+    #opcoes button {
+      display: block;
+      margin: 0.5rem auto;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Bem-vinda, minha princesa 💛</h1>
+    <p>Eu fiz esse site só pra você. Uma pequena jornada cheia de carinho te espera.</p>
+    <button onclick="startQuiz()">Começar</button>
+
+    <section id="quiz" style="display:none">
+      <h2>Quiz do Amor 🧡</h2>
+      <p id="pergunta"></p>
+      <div id="opcoes"></div>
+    </section>
+
+    <section id="final" style="display:none">
+      <h2>Você terminou o quiz, minha princesa!</h2>
+      <p>Essa é só uma pequena parte do que eu sinto por você. Cada detalhe aqui foi feito com carinho.</p>
+      <p>Quero viver muitas outras fases ao seu lado, não só nesse site, mas na vida.</p>
+      <a href="https://www.youtube.com/watch?v=SNye0h9mLHw" target="_blank">
+        <button>Ouça nossa música 💖</button>
+      </a>
+    </section>
+  </main>
+
+  <script>
+    const perguntas = [
+      {
+        pergunta: "Qual é o apelido carinhoso que eu mais uso com você?",
+        opcoes: ["Amor", "Bebê", "Minha princesa", "Linda"],
+        correta: 2
+      },
+      {
+        pergunta: "O que eu mais gosto de fazer com você?",
+        opcoes: ["Assistir filme", "Te abraçar", "Conversar", "Sair pra comer"],
+        correta: 1
+      },
+      {
+        pergunta: "Qual dessas coisas eu já te falei?",
+        opcoes: [
+          "Você é meu lugar seguro",
+          "Nunca pensei que me apaixonaria assim",
+          "Você é diferente de tudo que já vivi",
+          "Todas as anteriores"
+        ],
+        correta: 3
+      }
+    ];
+
+    let indice = 0;
+
+    function startQuiz() {
+      document.querySelector("button").style.display = "none";
+      document.getElementById("quiz").style.display = "block";
+      mostrarPergunta();
+    }
+
+    function mostrarPergunta() {
+      const p = perguntas[indice];
+      document.getElementById("pergunta").textContent = p.pergunta;
+      const opcoesDiv = document.getElementById("opcoes");
+      opcoesDiv.innerHTML = "";
+      p.opcoes.forEach((opcao, i) => {
+        const btn = document.createElement("button");
+        btn.textContent = opcao;
+        btn.onclick = () => verificarResposta(i);
+        opcoesDiv.appendChild(btn);
+      });
+    }
+
+    function verificarResposta(escolhida) {
+      const certa = perguntas[indice].correta;
+      if (escolhida === certa) {
+        indice++;
+        if (indice < perguntas.length) {
+          mostrarPergunta();
+        } else {
+          document.getElementById("quiz").style.display = "none";
+          document.getElementById("final").style.display = "block";
+        }
+      } else {
+        alert("Tenta de novo, minha princesa 💛");
+      }
+    }
+  </script>
+</body>
+</html>
